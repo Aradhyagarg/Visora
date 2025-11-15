@@ -18,8 +18,6 @@ const AiTools = () => {
           cutting-edge AI technology.
         </p>
       </div>
-
-      {/* grid with 3 items per row on md+ */}
       <div className="mt-10 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 justify-items-center">
         {AiToolsData.map((tool, index) => (
           <div

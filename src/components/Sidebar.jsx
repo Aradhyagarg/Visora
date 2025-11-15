@@ -60,6 +60,3 @@ bottom-0 ${
 };
 
 export default Sidebar;
-
-
-//{user.imageUrl}{user.fullName}

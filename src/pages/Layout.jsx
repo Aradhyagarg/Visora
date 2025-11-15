@@ -12,39 +12,39 @@ const Layout = () => {
   if (!isLoaded) return null;
 
   return user ? (
-    <div className="flex flex-col items-start justify-start h-screen">
-      <nav className="w-full px-8 min-h-14 flex items-center justify-between border-b border-gray-200">
+    <div className="flex flex-col h-screen">
+      <nav className="w-full px-6 sm:px-8 min-h-[64px] flex items-center justify-between border-b border-gray-200">
         <img
-          src=""
+          src="/Visora.png"
           alt="Logo"
-          className="h-10 cursor-pointer w-32 sm:w-44"
+          className="w-20 sm:w-30 cursor-pointer"
           onClick={() => navigate("/")}
         />
         {sidebar ? (
           <X
             onClick={() => setSidebar(false)}
-            className="w-6 h-6 text-gray-600 sm:hidden"
+            className="w-6 h-6 text-gray-600 sm:hidden cursor-pointer"
           />
         ) : (
           <Menu
             onClick={() => setSidebar(true)}
-            className="w-6 h-6 text-gray-600 sm:hidden"
+            className="w-6 h-6 text-gray-600 sm:hidden cursor-pointer"
           />
         )}
       </nav>
 
-      <div className="flex-1 w-full flex h-[calc(100vh-64px)]">
+      <div className="flex-1 flex overflow-hidden">
         <Sidebar sidebar={sidebar} setSidebar={setSidebar} />
-        <div className="flex-1 bg-[#F4F7FB] overflow-y-auto">
+        <main className="flex-1 bg-[#F4F7FB] overflow-y-auto p-6">
           <Outlet />
-        </div>
+        </main>
       </div>
     </div>
   ) : (
     <div className="flex items-center justify-center h-screen">
       <SignIn />
     </div>
-  )
+  );
 };
 
 export default Layout;

@@ -8,12 +8,14 @@ import Home from './pages/Home'
 import Layout from './pages/Layout'
 import RemoveBackground from './pages/RemoveBackground'
 import RemoveObject from './pages/RemoveObject'
-import ReviewResume from './pages/ReviewResume'
 import WriteArticle from './pages/WriteArticle'
+import { Toaster } from 'react-hot-toast'
 
 function App() {
+  
   return (
     <>
+    <Toaster />
       <Routes>
         <Route path='/' element={<Home />}/>
         <Route path='/ai' element={<Layout />}>
@@ -22,8 +24,7 @@ function App() {
           <Route path='blog-titles' element={<BlogTitles/>}/>
           <Route path='generate-images' element={<GenerateImages/>}/>
           <Route path='remove-background' element={<RemoveBackground/>}/> 
-          <Route path='remove-object' element={<RemoveObject/>}/> 
-          <Route path='review-resume' element={<ReviewResume/>}/>
+          <Route path='remove-object' element={<RemoveObject/>}/>
           <Route path='community' element={<Community/>}/>
         </Route>
       </Routes>

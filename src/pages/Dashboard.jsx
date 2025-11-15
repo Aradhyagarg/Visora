@@ -1,59 +1,81 @@
-import { Protect } from '@clerk/clerk-react';
-import { Gem, Sparkles } from 'lucide-react';
-import React from 'react'
-import { useEffect } from 'react';
-import { useState } from 'react'
-import CreationItem from '../components/CreationItem';
+import { Protect, useAuth, useUser } from "@clerk/clerk-react";
+import { Gem, Sparkles } from "lucide-react";
+import React, { useEffect, useState } from "react";
+import axios from "axios";
+import CreationItem from "../components/CreationItem";
 
 const Dashboard = () => {
-  const [creation, setCreation] = useState([]);
-  const getDashboardData = async () => {
-    setCreation(dummyCreationData);
-  }
+  const [creations, setCreations] = useState([]);
+  const { getToken } = useAuth();
+  const { user } = useUser();
+
+  const fetchUserCreations = async () => {
+    try {
+      const token = await getToken();
+      const { data } = await axios.get("/api/user/get-user-creations", {
+        headers: { Authorization: `Bearer ${token}` },
+      });
+
+      if (data.success) {
+        setCreations(data.creations);
+      } else {
+        console.error("Failed to fetch user creations:", data.message);
+      }
+    } catch (error) {
+      console.error("Error fetching creations:", error);
+    }
+  };
 
   useEffect(() => {
-    getDashboardData();
-  }, []);
+    if (user) {
+      fetchUserCreations();
+    }
+  }, [user]);
 
   return (
-    <div className='h-full overflow-y-scroll p-6'>
-      <div className='flex justify-start gap-4 flex-wrap'>
-        <div className='flex justify-between items-center w-72 p-4 px-6 bg-white rounded-xl border border-grey-200'>
-          <div className='text-slate-600'>
-            <p className='text-sm'>
-              Total Creation
-            </p>
-            <h2 className='text-xl font-semibold'></h2>
-          </div>
-          <div className='w-10 h-10 rounded-lg bg-gradient-to-br from-[#3588F2]
-to-[#0BB0D7] text-white flex justify-center items-center'>
-            <Sparkles className='w-5 text-white' />
+    <div className="h-full overflow-y-scroll">
+      <div className="flex flex-wrap gap-6">
+        <div className="flex-1 min-w-[250px] p-6 bg-white rounded-xl border border-gray-200 shadow hover:shadow-lg transition">
+          <div className="flex justify-between items-center mb-4">
+            <div>
+              <p className="text-sm text-gray-500">Total Creations</p>
+              <h2 className="text-2xl font-bold">{creations.length}</h2>
+            </div>
+            <div className="w-12 h-12 rounded-lg bg-gradient-to-br from-[#3588F2] to-[#0BB0D7] text-white flex items-center justify-center">
+              <Sparkles className="w-6 h-6" />
+            </div>
           </div>
         </div>
 
-        <div className='flex justify-between items-center w-72 p-4 px-6 bg-white rounded-xl border border-grey-200'>
-          <div className='text-slate-600'>
-            <p className='text-sm'>
-              Active Plan
-            </p>
-            <h2 className='text-xl font-semibold'>
-              <Protect plan='premium' fallback="Free">Premium</Protect>
-            </h2>
-          </div>
-          <div className='w-10 h-10 rounded-lg bg-gradient-to-br from-[#FF61C5]
-to-[#9E53EE] text-white flex justify-center items-center'>
-            <Gem className='w-5 text-white' />
+        <div className="flex-1 min-w-[250px] p-6 bg-white rounded-xl border border-gray-200 shadow hover:shadow-lg transition">
+          <div className="flex justify-between items-center mb-4">
+            <div>
+              <p className="text-sm text-gray-500">Active Plan</p>
+              <h2 className="text-2xl font-bold">
+                <Protect plan="premium" fallback="Free">Premium</Protect>
+              </h2>
+            </div>
+            <div className="w-12 h-12 rounded-lg bg-gradient-to-br from-[#FF61C5] to-[#9E53EE] text-white flex items-center justify-center">
+              <Gem className="w-6 h-6" />
+            </div>
           </div>
         </div>
       </div>
-      <div className='space-y-3'>
-        <p className='mt-6 mb-4'>Recent Creations</p>
-        {
-          creation.map((item) => <CreationItem key={item.id} item={item}/>)
-        }
+
+      <div className="mt-8 space-y-4">
+        <h3 className="text-lg font-semibold text-gray-700">Your Creations</h3>
+        {creations.length === 0 ? (
+          <p className="text-gray-400">You haven’t created anything yet.</p>
+        ) : (
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+            {creations.map((item) => (
+              <CreationItem key={item._id} item={item} />
+            ))}
+          </div>
+        )}
       </div>
     </div>
-  )
-}
+  );
+};
 
-export default Dashboard
+export default Dashboard;

@@ -29,15 +29,13 @@ const Testimonial = () => {
           <h2 className='text-slate-700 text-[42px] font-semibold'>Loved by Creators</h2>
           <p className='text-gray-500 max-w-lg mx-auto'>Don't just take our word for it. Here's what our users are saying.</p>
         </div>
-  
-        {/* Grid with exactly 3 cards per row */}
+
         <div className='mt-10 grid grid-cols-1 md:grid-cols-3 gap-6 justify-items-center'>
           {dummyTestimonialData.map((testimonial, index) => (
             <div
               key={index}
               className='p-8 w-full max-w-xs rounded-lg bg-[#FDFDFE] shadow-lg border border-gray-100 hover:-translate-y-1 transition duration-300 cursor-pointer'
             >
-              {/* Stars based on rating */}
               <div className="flex items-center gap-1">
                 {Array.from({ length: 5 }).map((_, i) => (
                   <svg

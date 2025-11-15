@@ -9,15 +9,13 @@ const Navbar = () => {
 
   return (
     <div className="absolute top-0 left-0 z-20 w-full backdrop-blur-xl bg-white/70 flex justify-between items-center py-3 px-4 sm:px-20 xl:px-32 shadow-sm">
-      {/* Logo */}
       <img
-        src="/logo.png" // <-- replace with your actual logo path
+        src="/Visora.png"
         alt="Visora Logo"
         className="w-32 sm:w-44 cursor-pointer"
         onClick={() => navigate('/')}
       />
 
-      {/* Right side */}
       {user ? (
         <UserButton afterSignOutUrl="/" />
       ) : (
