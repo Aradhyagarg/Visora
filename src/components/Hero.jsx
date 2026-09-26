@@ -6,8 +6,7 @@ const Hero = () => {
   return (
     <div>
       <div
-        className="px-4 sm:px-20 x1:px-32 relative inline-flex flex-col w-full justify-center bg-[url(/gradientBackground.png)] bg-cover bg-no-repeat
-min-h-screen"
+        className="px-4 sm:px-20 x1:px-32 relative inline-flex flex-col w-full justify-center bg-gradient-to-b from-blue-50/50 via-indigo-50/30 to-white bg-cover bg-no-repeat min-h-screen"
       >
         <div className="text-center mb-6">
           <h1
