@@ -6,8 +6,6 @@ import { useAuth } from "@clerk/clerk-react";
 import { toast } from "react-toastify";
 import ReactMarkdown from "react-markdown";
 
-axios.defaults.baseURL = import.meta.env.VITE_BASE_URL;
-
 const WriteArticle = () => {
   const [input, setInput] = useState("");
   const [loading, setLoading] = useState(false);

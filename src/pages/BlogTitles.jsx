@@ -6,8 +6,6 @@ import ReactMarkdown from "react-markdown";
 import axios from "axios";
 import { useAuth } from '@clerk/clerk-react';
 
-axios.defaults.baseURL = import.meta.env.VITE_BASE_URL;
-
 const BlogTitles = () => {
   const [input, setInput] = useState("");
   

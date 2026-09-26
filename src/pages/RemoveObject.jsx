@@ -4,8 +4,6 @@ import React, { useState } from "react";
 import axios from "axios";
 import { toast } from 'react-toastify';
 
-axios.defaults.baseURL = import.meta.env.VITE_BASE_URL;
-
 const RemoveObject = () => {
   const [input, setInput] = useState(null);
   const [object, setObject] = useState("");

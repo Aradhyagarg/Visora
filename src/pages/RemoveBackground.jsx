@@ -4,8 +4,6 @@ import { useAuth } from "@clerk/clerk-react";
 import { Eraser, Sparkles } from "lucide-react";
 import { toast } from 'react-toastify';
 
-axios.defaults.baseURL = import.meta.env.VITE_BASE_URL;
-
 const RemoveBackground = () => {
   const [input, setInput] = useState(null); 
   const [loading, setLoading] = useState(false);

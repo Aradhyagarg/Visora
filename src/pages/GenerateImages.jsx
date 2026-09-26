@@ -4,8 +4,6 @@ import React, { useState } from 'react';
 import { toast } from 'react-toastify';
 import axios from "axios";
 
-axios.defaults.baseURL = import.meta.env.VITE_BASE_URL;
-
 const GenerateImages = () => {
   const [input, setInput] = useState("");
 
